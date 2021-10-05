@@ -41,7 +41,7 @@ Game.RuinTheFun()
 
 window.addEventListener('keydown', function(e){
 if(e.key == "h"){
-alert("Link github girafhacker '. ")
+alert("https://github.com/girafhacker/cookie-clicker-hacks/issues '. ")
 }
 });
 
