@@ -1,0 +1,140 @@
+// ==UserScript==
+// @name         Cookie Clicker cheat codes 1 :
+// @version      1.0
+// @description  With this code you can cheat almost anything.
+// @author       girafhacker and nocap
+// @match        https://orteil.dashnet.org/cookieclicker/
+// @namespace https://github.com/girafhacker
+// ==/UserScript==
+
+window.onload = function(){
+alert("Look at the top right for the keybinds for more help press H'. ")
+}
+
+window.addEventListener('keydown', function(e){
+if(e.key == "y"){
+var ez = prompt("Enter Number Of Sugar Lumps You Want.", 1);
+Game.gainLumps(parseInt(ez));
+}
+});
+
+window.addEventListener('keydown', function(e){
+if(e.key == "e"){
+var ez = prompt("Enter Number of cookies You Want.", 1000000000);
+Game.Earn(parseInt(ez));
+}
+});
+
+window.addEventListener('keydown', function(e){
+if(e.key == "k"){
+var newShimmer=new Game.shimmer("golden");
+
+      newShimmer.spawnLead=1;(parseInt(ez));
+}
+});
+
+window.addEventListener('keydown', function(e){
+if(e.key == "f"){
+Game.RuinTheFun()
+}
+});
+
+window.addEventListener('keydown', function(e){
+if(e.key == "h"){
+alert("Link github girafhacker '. ")
+}
+});
+
+window.addEventListener('keydown', function(e){
+if(e.key == "a"){
+Object.values(Game.AchievementsById).forEach(function(e) {
+    Game.Win(e.name);
+});
+}
+});
+
+window.addEventListener('keydown', function(e){
+if(e.key == "c"){
+var ez = prompt("Enter Number Of Heavenly Chips You Want In Total.", 1000000000);
+Game.heavenlyChips=(parseInt(ez));
+}
+});
+
+window.addEventListener('keydown', function(e){
+if(e.key == "g"){
+Game.addClass("elderWrath");
+}
+});
+
+window.addEventListener('keydown', function(e){
+if(e.key == "d"){
+Game.removeClass("elderWrath");
+}
+});
+
+
+
+
+
+
+
+
+
+
+(function (e) {
+    'use strict';
+
+
+    var words = {
+
+        '^ Sponsored link ^' : ' Keybinds: H = for help Y = for sugarlump E = for cookies C = heavenlychips A = all achiefments F = ruin the fun K = golden cookie.press D to stop all eastereggs',
+
+    '':''};
+
+
+    var regexs = [], replacements = [],
+        tagsWhitelist = ['PRE', 'BLOCKQUOTE', 'CODE', 'INPUT', 'BUTTON', 'TEXTAREA'],
+        rIsRegexp = /^\/(.+)\/([gim]+)?$/,
+        word, text, texts, i, userRegexp;
+
+    function prepareRegex(string) {
+        return string.replace(/([\[\]\^\&\$\.\(\)\?\/\\\+\{\}\|])/g, '\\$1');
+    }
+
+    function isTagOk(tag) {
+        return tagsWhitelist.indexOf(tag) === -1;
+    }
+
+    delete words[''];
+
+    for (word in words) {
+        if ( typeof word === 'string' && words.hasOwnProperty(word) ) {
+            userRegexp = word.match(rIsRegexp);
+
+            if (userRegexp) {
+                regexs.push(
+                    new RegExp(userRegexp[1], 'g')
+                );
+            } else {
+                regexs.push(
+                    new RegExp(prepareRegex(word).replace(/\\?\*/g, function (fullMatch) {
+                        return fullMatch === '\\*' ? '*' : '[^ ]*';
+                    }), 'g')
+                );
+            }
+
+            replacements.push( words[word] );
+        }
+    }
+
+    texts = document.evaluate('//body//text()[ normalize-space(.) != "" ]', document, null, 6, null);
+    for (i = 0; text = texts.snapshotItem(i); i += 1) {
+        if ( isTagOk(text.parentNode.tagName) ) {
+            regexs.forEach(function (value, index) {
+                text.data = text.data.replace( value, replacements[index] );
+            });
+        }
+    }
+
+}());
+
